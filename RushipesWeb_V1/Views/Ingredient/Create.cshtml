@@ -1,0 +1,48 @@
+﻿@model RushipesWeb_V1.Models.ViewModels.AddIngredientRequest
+
+
+<div class="card shadow border-0 my-4 pb-4">
+    <div class="card-header primary-background-color-site ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Créer un Ingrédient</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+
+            <div class="border p-3 mt-4">
+                
+
+                <div class="form-floating py-2 col-12">
+                    <input type="text" class="form-control" id="name" asp-for="Name" placeholder="name@example.com" required />
+                    <label class="form-label">Nom</label>
+                    
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success form-control">Créer</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Ingredient" asp-action="Index" class="btn btn-primary border form-control">
+                            Retour à la liste
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+      
+    }
+}
+
+

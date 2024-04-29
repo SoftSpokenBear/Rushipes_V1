@@ -1,0 +1,54 @@
+﻿@model RushipesWeb_V1.Models.ViewModels.EditIngredientRequest
+
+
+<div class="card shadow border-0 my-4 pb-4">
+    <div class="card-header primary-background-color-site ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Modifier un Ingrédient</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+
+
+            <div class="border p-3 mt-4">
+
+                <button type="submit" class="btn btn-primary py-2" asp-controller="Ingredient" asp-action="Index">Retour</button>
+
+                <input asp-for="Id" hidden/>
+                <div asp-validation-summary="ModelOnly"></div> 
+                <div class="form-floating py-2 col-12">
+                    <input type="text" asp-for="Id" id="id" class="form-control border-0 shadow" disabled />
+                    <label asp-for="Id"  class="ms-2"></label>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input type="text" class="form-control" id="name" asp-for="Name" placeholder="name@example.com" required />
+                    <label class="form-label">Nom</label>
+
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+
+                <div class="mb-3 d-flex">
+                    <button type="submit" class="btn btn-success">Modifier</button>
+                    <button type="submit" class="btn btn-danger  ms-2"
+                            asp-area="" asp-controller="Ingredient" asp-action="Delete">
+                        Supprimer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+        //Pour utiliser les validations du fichier dans le dossier Shared
+    }
+}
+
+

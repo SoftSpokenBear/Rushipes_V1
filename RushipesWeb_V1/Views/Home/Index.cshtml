@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<RushipesWeb_V1.Models.Recette>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row pb-5 mb-5 page">
+    <div class="test">
+        <h1>Rushipes</h1>
+    </div>
+    @if (Model != null)
+    {
+        @foreach (var recette in Model.Where(r => r.Visible))
+        {
+            <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 rounded-4 position-relative">
+                            <a asp-controller="RecetteDetails" asp-action="Details" asp-route-recetteId="@recette.Id">
+                                @if (recette.ImageUrl != null && recette.ImageUrl.Count() > 0)
+                                {
+                                    <img src="@recette.ImageUrl" class="card-img-top rounded img-fluid" style="width: 100%; height: auto; object-fit: cover;" />
+                                }
+                                else
+                                {
+                                    <img src="https://placehold.co/500x600.png" class="card-img-top rounded img-fluid" style="width: 100%; height: auto; object-fit: cover;" />
+                                }
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <div class="text-white text-center">
+                                        <p class="card-title h4 text-uppercase">@recette.Titre</p>
+                                        <p class="card-title fw-bold">@recette.Auteur</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 </div>

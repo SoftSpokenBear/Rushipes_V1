@@ -1,0 +1,44 @@
+.test {
+    text-align: center;
+    margin-top: 25px;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.page {
+    min-height: 100vh;
+}
+
+
+.primary-background-color-site {
+    background-color: #ffcc80;
+}
+
+.btn-primary-color-style {
+    font-weight: 600;
+    background-color: #ffcc80;
+    transition: all 300ms ease;
+    padding: 1rem;
+    width: 6rem;
+    border: 1px solid #007bff;
+    border-radius: 2rem;
+}
+
+
+.btn-primary-color-style:hover {
+    background-color: rgba(255, 204, 128, 0.5)
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+
+.card-img-top {
+    transition: transform 0.3s ease;
+}

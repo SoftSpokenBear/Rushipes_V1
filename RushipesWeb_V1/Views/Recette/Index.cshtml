@@ -1,0 +1,60 @@
+﻿@model List<RushipesWeb_V1.Models.Recette>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header primary-background-color-site ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Liste des recettes</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3 justify-content-center">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6 text-end">
+                <a asp-controller="Recette" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Créer
+                </a>
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Visible</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.Id</td>
+                        <td>@obj.Titre</td>
+                        @if (obj.Visible)
+                        {
+                            <td class="align-middle"><i class="bi bi-check-circle-fill fs-4"></i></td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td class="align-middle">
+
+                            <a asp-controller="Recette" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-info mx-2">
+                                <i class="bi bi-pencil-square"></i> Modifier
+                            </a>
+                        
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

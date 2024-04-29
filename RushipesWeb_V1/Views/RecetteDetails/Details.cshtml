@@ -1,0 +1,63 @@
+﻿@model RushipesWeb_V1.Models.Recette
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            @if (Model != null)
+            {
+                <h1 class="display-4 mb-3 text-dark">@Model.Titre</h1>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted"><i class="bi bi-person-fill"></i> @Model.Auteur</span>
+                    <span class="text-muted"><i class="bi bi-calendar-event-fill"></i> @Model.DatePubli.ToShortDateString()</span>
+                </div>
+
+                <img src="@Model.ImageUrl" class="img-fluid rounded shadow mb-4" alt="Image de recette" />
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">Difficulté</h3>
+                        <p class="card-text">@Model.Difficulte</p>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">Description</h3>
+                        <p class="card-text">@Model.Description</p>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">Ingrédients</h3>
+                        <ul class="list-group list-group-flush">
+                            @foreach (var ingredient in Model.Ingredients)
+                            {
+                                <li class="list-group-item">@ingredient.Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">Préparation</h3>
+                        <ol class="list-group list-group-numbered">
+                            @foreach (var etape in Model.PreparationEtape)
+                            {
+                                <li class="list-group-item">@etape</li>
+                            }
+                        </ol>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    Recette non trouvée !
+                </div>
+            }
+        </div>
+    </div>
+</div>
