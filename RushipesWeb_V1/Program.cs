@@ -6,6 +6,8 @@ using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using RushipesWeb_V1.Utility;
+using RushipesWeb_V1.DbInitializer;
+using RushipesWeb.DbInitializer;
 
 namespace RushipesWeb_V1
 {
@@ -40,7 +42,7 @@ namespace RushipesWeb_V1
                 options.Cookie.IsEssential = true;
             });
 
-            //builder.Services.AddScoped<IDbInitializer, DbInitializerr>();
+            builder.Services.AddScoped<IDbInitializer, DbInitializerr>();
             builder.Services.AddScoped<IRecettePostRepository, RecettePostRepository>();
             builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
@@ -64,13 +66,24 @@ namespace RushipesWeb_V1
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            SeedDatabase();
             app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+            void SeedDatabase()
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                    dbInitializer.Initialize();
+                }
+            }
         }
     }
 }

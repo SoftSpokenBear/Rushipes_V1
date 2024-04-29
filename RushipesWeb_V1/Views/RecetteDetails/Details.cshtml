@@ -12,7 +12,15 @@
                     <span class="text-muted"><i class="bi bi-calendar-event-fill"></i> @Model.DatePubli.ToShortDateString()</span>
                 </div>
 
-                <img src="@Model.ImageUrl" class="img-fluid rounded shadow mb-4" alt="Image de recette" />
+                if (Model.ImageUrl != null && Model.ImageUrl.Count() > 0)
+                {
+                    <img src="@Model.ImageUrl" class="img-fluid rounded shadow mb-4" alt="Image de recette" style="width: 100%; height: auto; object-fit: cover;" />
+                }
+                else
+                {
+                    <img src="https://placehold.co/500x600.png" class="img-fluid rounded shadow mb-4" alt="Image de recette" style="width: 100%; height: auto; object-fit: cover;" />
+                }
+                
 
                 <div class="card mb-4">
                     <div class="card-body">
