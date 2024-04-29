@@ -4,9 +4,12 @@ using Newtonsoft.Json;
 using RushipesWeb_V1.Models.ViewModels;
 using RushipesWeb_V1.Models;
 using RushipesWeb_V1.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using RushipesWeb_V1.Utility;
 
 namespace RushipesWeb_V1.Controllers
 {
+    [Authorize(Roles =SD.Role_Admin)]
     public class IngredientController : Controller
     {
         private readonly IIngredientRepository _ingredientRepository;

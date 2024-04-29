@@ -26,8 +26,8 @@
                 </button> *@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav me-auto">
-                        @* @if (User.Identity.IsAuthenticated)
-                        { *@
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Gestion
@@ -37,11 +37,11 @@
                                     <a class="dropdown-item" asp-area="" asp-controller="Ingredient" asp-action="Index">Ingredients</a>
                                 </div>
                             </li>
-                        @* } *@
+                        }
                     </ul>
 
                 </div>
-                @* <partial name="_LoginPartial" /> *@
+                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>

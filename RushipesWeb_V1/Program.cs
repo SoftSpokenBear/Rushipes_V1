@@ -3,6 +3,9 @@ using RushipesWeb_V1.Data;
 using RushipesWeb_V1.Repository.IRepository;
 using RushipesWeb_V1.Repository;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using RushipesWeb_V1.Utility;
 
 namespace RushipesWeb_V1
 {
@@ -19,13 +22,32 @@ namespace RushipesWeb_V1
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<RushipesDbContext>().AddDefaultTokenProviders();
+            builder.Services.AddRazorPages();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             //builder.Services.AddScoped<IDbInitializer, DbInitializerr>();
             builder.Services.AddScoped<IRecettePostRepository, RecettePostRepository>();
             builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
 
             var app = builder.Build();
 
-            // Configuration de la culture par défaut en français
+            // Configuration de la culture par dï¿½faut en franï¿½ais
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("fr-FR");
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fr-FR");
 
@@ -43,7 +65,7 @@ namespace RushipesWeb_V1
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
