@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using RushipesWeb_V1.Data;
+
 namespace RushipesWeb_V1
 {
     public class Program
@@ -8,6 +11,10 @@ namespace RushipesWeb_V1
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<RushipesDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             var app = builder.Build();
 
