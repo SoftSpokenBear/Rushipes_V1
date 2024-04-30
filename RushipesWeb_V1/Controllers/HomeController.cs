@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RushipesWeb_V1.Data;
 using RushipesWeb_V1.Models;
 using System.Diagnostics;
@@ -16,9 +17,9 @@ namespace RushipesWeb_V1.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Recette> listeRecette = _db.Recettes.ToList();
+            var listeRecette = await _db.Recettes.ToListAsync();
             return View(listeRecette);
         }
 
